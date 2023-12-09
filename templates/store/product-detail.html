@@ -23,7 +23,7 @@
 <h2 class="title">{{ products.product_name }}</h2>
 
 <div class="mb-3"> 
-	<var class="price h4">₹{{ products.price}}</var> 
+	<var class="price h4">₹ {{ products.price}}</var> 
 </div> 
 
 <p>{{ products.description }}</p>
@@ -74,7 +74,7 @@
 	<h5 class="text-danger"> Out Of Stock</h5>
 
 	{% else %}
-	<a href="./product-detail.html" class="btn  btn-primary"> <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i>  </a>
+	<a href="{% url 'add_cart' products.id %}" class="btn  btn-primary"> <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i>  </a>
 	{% endif %}
 
 </article> <!-- product-info-aside .// -->
