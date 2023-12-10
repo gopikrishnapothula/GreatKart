@@ -41,7 +41,8 @@ def signin(request):
             auth.login(request,user)
             return redirect('home')
         else:
-            pass
+            return render(request,'accounts/login.html')
+
    
    
     return render(request,'accounts/login.html')
@@ -49,3 +50,4 @@ def signin(request):
 def logout(request):
     auth.logout(request)
     return redirect('login')
+
