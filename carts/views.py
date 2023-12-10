@@ -76,7 +76,7 @@ def cart(request):
 
 
     except Cart.DoesNotExist:
-        return render(request, 'cart.html')
+        return render(request, 'cart.html',{'len':0})
     
     return render(request, 'cart.html', context)
 

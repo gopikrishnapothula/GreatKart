@@ -39,7 +39,9 @@
 	
 	<td>
 		<figure class="itemside align-items-center">
-			<div class="aside"><img src="{{ item.product.images.url }}" class="img-sm"></div>
+			<div class="aside">
+				<a href="{{ item.product.get_url }}"> <img  src="{{ item.product.images.url }}" class="img-sm">  </a>	 
+			</div>
 			<figcaption class="info">
 				<a href="{{ item.product.get_url }}" class="title text-dark">{{ item.product.product_name }}</a>
 				<p class="text-muted small">Matrix: 25 Mpx <br> Brand: Canon</p>
