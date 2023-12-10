@@ -48,7 +48,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'whitenoise.middleware.common.WhiteNoiseMiddleware', # deploy
+    'whitenoise.middleware.WhiteNoiseMiddleware', # deploy
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
