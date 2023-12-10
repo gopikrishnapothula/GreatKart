@@ -1,0 +1,6 @@
+TECHNOLOGIES:
+
+Python
+Django
+Venv
+
