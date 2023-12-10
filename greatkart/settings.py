@@ -34,7 +34,7 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'whitenoise.runserver_nostatic', # deploy
+    'whitenoise.runserver_nostatic', # deploy mandatory
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
