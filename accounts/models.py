@@ -18,6 +18,7 @@ class MyAccountManager(BaseUserManager):
         )
 
         user.set_password(password)
+        user.is_active=True
         user.save(using=self.db)
         return user
 

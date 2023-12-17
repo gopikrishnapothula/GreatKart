@@ -51,7 +51,18 @@ $(document).ready(function() {
 <!-- ========================= SECTION PAGETOP ========================= -->
 <section class="section-pagetop bg">
 <div class="container">
+	{% if 'search' in request.path %}
+
+	<h2 class="title-page">Search Results</h2>
+
+	{% elif 'category' in request.path %}
+
+	<h2 class="title-page">FIlter Results</h2>
+
+	{% else %}
 	<h2 class="title-page">Our Store</h2>
+
+	{% endif %}
 	
 </div> <!-- container //  -->
 </section>
@@ -172,6 +183,7 @@ $(document).ready(function() {
 </header><!-- sect-heading -->
 
 <div class="row">
+	{% if product_count %}
     {% for product in products %}
 	<div class="col-md-4">
 		<figure class="card card-product-grid">
@@ -202,6 +214,12 @@ $(document).ready(function() {
 	</div> <!-- col.// -->
 
 	{% endfor %}
+
+	{% else %}
+
+	<h2> No Products Found</h2>
+
+	{% endif %}
 </div> <!-- row end.// -->
 
 

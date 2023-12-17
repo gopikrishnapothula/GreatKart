@@ -1,6 +1,10 @@
 from django.shortcuts import render,redirect
 from .forms import RegistrationForm
 
+from carts.models import Cart,CartItem
+
+from carts.views import _cart_id
+
 from django.contrib import auth
 
 from .models import Account,MyAccountManager
@@ -38,6 +42,18 @@ def signin(request):
         user=auth.authenticate(email=email,password=password)
 
         if user is not None:
+            
+            try:
+                cart= Cart.objects.get(cart_id=_cart_id(request))
+         
+                cart_items=CartItem.objects.filter(cart=cart, is_active=True)
+
+                for cart_item in cart_items:
+                    cart_item.user=user
+                    cart_item.save()
+
+            except:
+                pass
             auth.login(request,user)
             return redirect('home')
         else:
