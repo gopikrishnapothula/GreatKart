@@ -46,14 +46,50 @@ def signin(request):
             try:
                 cart= Cart.objects.get(cart_id=_cart_id(request))
          
-                cart_items=CartItem.objects.filter(cart=cart, is_active=True)
+                cart_item_exists=CartItem.objects.filter(cart=cart).exists()
 
-                for cart_item in cart_items:
-                    cart_item.user=user
-                    cart_item.save()
+                
+                if cart_item_exists:
+                    cart_item=CartItem.objects.filter(cart=cart)
+                    product_variation=[] # existing cart
+                    for item in cart_item:
+                        variation=item.variation.all()
+                        product_variation.append(list(variation))
 
-            except:
-                pass
+
+                    cart_item=CartItem.objects.filter(user=user)
+
+                    #Existing Variations -> Database
+                    #Current Variation  -> GET Request (product_variation)
+                    #Cart_id -> Database
+                    exst_var=[]
+                    id=[]
+                    for item in cart_item:
+                    
+                        existing_variation=item.variation.all()
+                        exst_var.append(list(existing_variation))
+                        id.append(item.id)
+
+                    for pr in product_variation:    
+                        if pr in exst_var:
+                            #increase cart_item quantity
+                            index=exst_var.index(pr)
+                            id=id[index]
+                            item=CartItem.objects.get(id=id )
+                            item.user=user
+                            item.quantity +=1 
+                            item.save()
+
+
+                        else:
+                            cart_items=CartItem.objects.filter(cart=cart)
+
+                            for cart_item in cart_items:
+                                cart_item.user=user
+                                cart_item.save()
+
+            except Exception as e:
+                print("Error in Exception" + str(e))
             auth.login(request,user)
             return redirect('home')
         else:

@@ -199,16 +199,15 @@ $(document).ready(function() {
 						<span class="price">₹ {{ product.price }}</span>
 						
 					</div> <!-- price-wrap.// -->
-				</div>
+				
 
 				{% if product.stock != 0 %}
 
-				<a href="{% url 'add_cart' product.id %}" class="btn btn-block btn-primary">Add to cart </a>
 				{% else %}
 
 				<h5 style="text-align: center;"   class="text-danger"> Out Of Stock </h5>
 				{% endif %}
-
+			</div>
 			</figcaption>
 		</figure>
 	</div> <!-- col.// -->
