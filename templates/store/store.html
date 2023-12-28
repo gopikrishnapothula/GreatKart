@@ -201,11 +201,15 @@ $(document).ready(function() {
 					</div> <!-- price-wrap.// -->
 				
 
-				{% if product.stock != 0 %}
-
-				{% else %}
+				{% if product.stock == 0 %}
 
 				<h5 style="text-align: center;"   class="text-danger"> Out Of Stock </h5>
+
+				{% elif product.stock <= 5 %}
+
+				<h5 style="text-align: center;"   class="text-warning"> {{product.stock}} left </h5>
+				{% else %}
+
 				{% endif %}
 			</div>
 			</figcaption>

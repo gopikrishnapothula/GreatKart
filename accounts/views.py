@@ -6,9 +6,11 @@ from carts.models import Cart,CartItem
 from carts.views import _cart_id
 
 from django.contrib import auth
-
+from django.contrib.auth.decorators import login_required
 from .models import Account,MyAccountManager
 # Create your views here.
+
+import requests
 
 def register(request):
     if request.method=='POST':
@@ -91,7 +93,20 @@ def signin(request):
             except Exception as e:
                 print("Error in Exception" + str(e))
             auth.login(request,user)
-            return redirect('home')
+
+
+            url=request.META.get('HTTP_REFERER')
+
+            try:
+                query=requests.utils.urlparse(url).query
+                
+                params=dict(x.split("=") for x in query.split("&"))
+                
+                return redirect(params['next'])
+            except:
+                return redirect('dashboard')
+
+                
         else:
             return render(request,'accounts/login.html')
 
@@ -99,7 +114,11 @@ def signin(request):
    
     return render(request,'accounts/login.html')
 
+@login_required(login_url='login')
 def logout(request):
     auth.logout(request)
     return redirect('login')
 
+@login_required(login_url='login')
+def dashboard(request):
+    return render(request,'dashboard.html')

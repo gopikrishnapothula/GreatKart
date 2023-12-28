@@ -29,6 +29,8 @@
 <!-- custom javascript -->
 <script src="{% static 'js/script.js' %}" type="text/javascript"></script>
 
+<script src="https://www.paypal.com/sdk/js?client-id=AVZUGAWorTXU35FfX1_MSQD6oHOkGvD_gXpWDKZ8NG_eMn9Bf9igW_y0nJxXs7--8sZFb1sE6DzVtK0j&currency=USD"></script>
+
 <script type="text/javascript">
 /// some script
 
@@ -110,6 +112,7 @@ $(document).ready(function() {
 						<div> 
 							{% if user.is_authenticated %}
 							<small class="title text-muted">Welcome {{user.first_name }}!</small>
+							<a href="{% url 'dashboard' %}">Dashboard</a> <span class="dark-transp"> | </span>
 							<a href="{% url 'logout' %}">Log Out </a> 
 						
 

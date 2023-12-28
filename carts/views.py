@@ -272,3 +272,51 @@ def remove_item(request,product_id,cart_id):
     return redirect('cart')
 
 
+
+@login_required(login_url='login')
+def check_out(request):
+    try:
+        prices={}
+        total=0
+
+        if request.user.is_authenticated:
+            cart_items=CartItem.objects.filter(user=request.user, is_active=True)
+        
+        
+        else:
+            cart= Cart.objects.get(cart_id=_cart_id(request))
+            cart_items=CartItem.objects.filter(cart=cart, is_active=True)
+        
+        
+        
+        
+        
+        
+        for cart_item in cart_items:
+           
+            total=total+ (cart_item.product.price * cart_item.quantity)
+        
+        
+        
+        tax=(5 * total)/100
+        for cart_item in cart_items:    
+            price=cart_item.product.price * cart_item.quantity 
+            prices[cart_item]=price
+        len= cart_items.count()
+
+        context={
+        'items':cart_items,
+        'total': total,
+        'tax': tax,
+        'amount': total+ tax ,
+        'price':prices,
+        'len':len,
+       
+        }
+    
+
+
+    except Cart.DoesNotExist:
+        return render(request, 'checkout.html')
+    
+    return render(request,'check_out.html',context)
