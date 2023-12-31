@@ -1,6 +1,6 @@
 #!/usr/bin/bash 
 
-sed -i 's/\[]/\["54.144.250.113"]/' /home/ubuntu/GreatKart/greatkart/settings.py
+sed -i 's/\[]/\["34.236.158.0"]/' /home/ubuntu/GreatKart/greatkart/settings.py
 
 python manage.py migrate 
 python manage.py makemigrations     
